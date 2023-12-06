@@ -1,7 +1,7 @@
 'use client';
 
 import dynamic from 'next/dynamic';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Viewer from '../components/Viewer';
 import { useRouter } from 'next/navigation';
 const Draft = dynamic(
@@ -24,6 +24,7 @@ export default function EditorPage({ params: { name } }: EditorPageProps) {
   };
 
   const handleSave = () => {
+    localStorage.setItem('html', html);
     router.push('/editor/result');
   };
 
@@ -34,10 +35,16 @@ export default function EditorPage({ params: { name } }: EditorPageProps) {
 
   const emptyString = html.length <= 1;
 
+  useEffect(() => {
+    setHtml(localStorage.getItem('html') ?? '');
+  }, []);
+
   return (
-    <div className="flex flex-col h-full">
-      <main className="flex-[1]">{editors[iName] ?? <Viewer />}</main>
-      <footer className="h-12">
+    <div className="flex flex-col h-full relative">
+      <main className="flex-[1]">
+        {editors[iName] ?? <Viewer html={html} />}
+      </main>
+      <footer>
         {editors[iName] && (
           <button
             className={`h-12 w-full radius rounded-t-2xl transition-colors ${

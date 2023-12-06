@@ -10,15 +10,19 @@
   },
   "dependencies": {
     "draft-js": "^0.11.7",
+    "draftjs-to-html": "^0.9.1",
     "next": "14.0.3",
     "react": "^18",
-    "react-dom": "^18"
+    "react-dom": "^18",
+    "sanitize-html": "^2.11.0"
   },
   "devDependencies": {
     "@types/draft-js": "^0.11.16",
+    "@types/draftjs-to-html": "^0.8.4",
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",
+    "@types/sanitize-html": "^2.9.5",
     "autoprefixer": "^10.0.1",
     "eslint": "^8",
     "eslint-config-next": "14.0.3",

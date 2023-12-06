@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from 'react';
 import { Editor, EditorState, RichUtils, convertToRaw } from 'draft-js';
+import draftToHtml from 'draftjs-to-html';
 import 'draft-js/dist/Draft.css';
 import './styles.css';
 
@@ -102,7 +103,7 @@ const Tools = ({ editorState, onEditorStateChange }: ToolsProps) => {
   const currentStyle = editorState.getCurrentInlineStyle();
 
   return (
-    <div className="h-12 flex gap-1 p-2 border-b-gray-800 border">
+    <div className="h-24 flex gap-1 p-2 border-b-gray-800 border flex-wrap">
       {tools.map((tool) => {
         const active =
           tool.styleType === 'block'
@@ -128,18 +129,16 @@ export default function Draft({ onChange }: DraftProps) {
   );
 
   useEffect(() => {
-    const blocks = convertToRaw(editorState.getCurrentContent()).blocks;
-    const value = blocks
-      .map((block) => (!block.text.trim() && '\n') || block.text)
-      .join('\n');
-    onChange(value);
+    const raw = convertToRaw(editorState.getCurrentContent());
+    const html = draftToHtml(raw);
+    onChange(html);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [editorState]);
 
   return (
-    <div className="h-full">
+    <div className="h-full flex flex-col">
       <Tools editorState={editorState} onEditorStateChange={setEditorState} />
-      <div className="h-[calc(100%-48px)] disable-tailwind">
+      <div className="flex-[1] disable-tailwind">
         <Editor editorState={editorState} onChange={setEditorState} />
       </div>
     </div>
