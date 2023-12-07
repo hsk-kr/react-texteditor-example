@@ -103,7 +103,7 @@ const Tools = ({ editorState, onEditorStateChange }: ToolsProps) => {
   const currentStyle = editorState.getCurrentInlineStyle();
 
   return (
-    <div className="h-24 flex gap-1 p-2 border-b-gray-800 border flex-wrap">
+    <div className="min-h-12 max-h-24 flex gap-1 p-2 border-b-gray-800 border flex-wrap">
       {tools.map((tool) => {
         const active =
           tool.styleType === 'block'
@@ -138,7 +138,7 @@ export default function Draft({ onChange }: DraftProps) {
   return (
     <div className="h-full flex flex-col">
       <Tools editorState={editorState} onEditorStateChange={setEditorState} />
-      <div className="flex-[1] disable-tailwind">
+      <div className="h-[0] min-h-[0] flex-[1] disable-tailwind overflow-y-auto">
         <Editor editorState={editorState} onChange={setEditorState} />
       </div>
     </div>

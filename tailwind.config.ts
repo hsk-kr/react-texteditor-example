@@ -14,7 +14,7 @@ const config: Config = {
         tertiary: '#e5e5e5',
       },
       height: {
-        screenUI: '100svh',
+        screenUI: '100dvh',
       },
     },
   },

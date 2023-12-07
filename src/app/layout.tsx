@@ -18,10 +18,10 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${inter.className} flex flex-col h-screenUI max-w-lg mx-auto bg-primary `}
+        className={`${inter.className} h-screenUI max-w-lg mx-auto bg-primary`}
       >
         <Header />
-        <main className="flex-1 bg-white">{children}</main>
+        <main className="h-[calc(100dvh-48px)] bg-white">{children}</main>
       </body>
     </html>
   );

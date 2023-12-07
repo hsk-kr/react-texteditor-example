@@ -40,8 +40,8 @@ export default function EditorPage({ params: { name } }: EditorPageProps) {
   }, []);
 
   return (
-    <div className="flex flex-col h-full relative">
-      <main className="flex-[1]">
+    <div className="h-full relative">
+      <main className="h-[calc(100%-48px)]">
         {editors[iName] ?? <Viewer html={html} />}
       </main>
       <footer>
