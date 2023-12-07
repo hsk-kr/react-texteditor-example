@@ -30,7 +30,7 @@ export default function Header() {
   const pathname = usePathname();
 
   return (
-    <ul className="min-h-[48px] h-12 flex justify-between">
+    <ul className="min-h-[48px] h-12 flex justify-between text-sm md:text-lg">
       {routes.map((route) => {
         const active = pathname.endsWith(route.href);
 

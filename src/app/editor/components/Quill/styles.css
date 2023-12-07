@@ -1,0 +1,7 @@
+.quill {
+  height: calc(100% - 44px);
+}
+
+.quill .ql-container {
+  border-width: 0px !important;
+}

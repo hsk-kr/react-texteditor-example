@@ -4,6 +4,7 @@ import dynamic from 'next/dynamic';
 import { useEffect, useState } from 'react';
 import Viewer from '../components/Viewer';
 import { useRouter } from 'next/navigation';
+import { Quill } from '../components/Quill';
 const Draft = dynamic(
   () => import('../components/Draft').then((mod) => mod.default),
   { ssr: false }
@@ -30,6 +31,7 @@ export default function EditorPage({ params: { name } }: EditorPageProps) {
 
   const editors: Record<string, React.ReactNode> = {
     draft: <Draft onChange={handleTextChange} />,
+    quill: <Quill onChange={handleTextChange} />,
   };
   const iName = name.toLowerCase();
 
@@ -44,10 +46,10 @@ export default function EditorPage({ params: { name } }: EditorPageProps) {
       <main className="h-[calc(100%-48px)]">
         {editors[iName] ?? <Viewer html={html} />}
       </main>
-      <footer>
-        {editors[iName] && (
+      {editors[iName] && (
+        <footer>
           <button
-            className={`h-12 w-full radius rounded-t-2xl transition-colors ${
+            className={`h-12 w-full text-sm md:text-lg radius rounded-t-2xl transition-colors ${
               emptyString ? 'bg-tertiary' : 'bg-secondary'
             }`}
             disabled={emptyString}
@@ -55,8 +57,8 @@ export default function EditorPage({ params: { name } }: EditorPageProps) {
           >
             SAVE
           </button>
-        )}
-      </footer>
+        </footer>
+      )}
     </div>
   );
 }
