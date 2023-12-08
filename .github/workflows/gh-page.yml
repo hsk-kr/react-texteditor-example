@@ -21,7 +21,7 @@ jobs:
           ASSET_PREFIX: /react-texteditor-example/
           BASE_PATH: /react-texteditor-example
         run: |
-          touch .env
+          echo "" > .env
           echo ASSET_PREFIX=$ASSET_PREFIX >> .env
           echo BASE_PATH=$BASE_PATH >> .env
       - name: Check .env content
