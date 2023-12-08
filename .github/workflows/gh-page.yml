@@ -24,6 +24,10 @@ jobs:
           touch .env
           echo ASSET_PREFIX=$ASSET_PREFIX >> .env
           echo BASE_PATH=$BASE_PATH >> .env
+      - name: Check .env content
+        run: |
+          cat .env
+          pwd
       - name: Build
         run: pnpm run build
       - name: Create .nojekyll
