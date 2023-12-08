@@ -20,7 +20,8 @@ jobs:
         env:
           ASSET_PREFIX: /react-texteditor-example/
           BASE_PATH: /react-texteditor-example
-        run: touch .env
+        run: |
+          touch .env
           echo ASSET_PREFIX=$ASSET_PREFIX >> .env
           echo BASE_PATH=$BASE_PATH >> .env
       - name: Build
