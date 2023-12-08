@@ -4,11 +4,11 @@
 
 .disable-tailwind p {
   display: block !important;
-  margin-block-start: 1em !important;
+  /* margin-block-start: 1em !important;
   margin-block-end: 1em !important;
   margin-inline-start: 0 !important;
-  margin-inline-end: 0 !important;
-  margin: 1em 0 !important;
+  margin-inline-end: 0 !important; */
+  /* margin: 1em 0 !important; */
   /* Add any other custom styles you want */
 }
 

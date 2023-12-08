@@ -15,7 +15,9 @@
     "react": "^18",
     "react-dom": "^18",
     "react-quill": "^2.0.0",
-    "sanitize-html": "^2.11.0"
+    "sanitize-html": "^2.11.0",
+    "slate": "^0.101.1",
+    "slate-react": "^0.101.3"
   },
   "devDependencies": {
     "@types/draft-js": "^0.11.16",
@@ -24,6 +26,8 @@
     "@types/react": "^18",
     "@types/react-dom": "^18",
     "@types/sanitize-html": "^2.9.5",
+    "@types/slate": "^0.47.15",
+    "@types/slate-react": "^0.50.1",
     "autoprefixer": "^10.0.1",
     "eslint": "^8",
     "eslint-config-next": "14.0.3",

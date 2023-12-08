@@ -5,6 +5,11 @@ import { usePathname } from 'next/navigation';
 
 const routes = [
   {
+    label: 'Home',
+    sLabel: 'Home',
+    href: '/',
+  },
+  {
     label: 'Draft',
     sLabel: 'Draft',
     href: '/editor/draft',
@@ -13,11 +18,6 @@ const routes = [
     label: 'Quill',
     sLabel: 'Quill',
     href: '/editor/quill',
-  },
-  {
-    label: 'Summernote',
-    sLabel: 'Summer',
-    href: '/editor/summernote',
   },
   {
     label: 'Slate React',

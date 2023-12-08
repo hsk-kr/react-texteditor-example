@@ -5,3 +5,7 @@
 .quill .ql-container {
   border-width: 0px !important;
 }
+
+.quill .ql-editor {
+  padding: 1rem;
+}

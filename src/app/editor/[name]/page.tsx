@@ -5,6 +5,8 @@ import { useEffect, useState } from 'react';
 import Viewer from '../components/Viewer';
 import { useRouter } from 'next/navigation';
 import { Quill } from '../components/Quill';
+import Slate from '../components/Slate';
+
 const Draft = dynamic(
   () => import('../components/Draft').then((mod) => mod.default),
   { ssr: false }
@@ -32,6 +34,7 @@ export default function EditorPage({ params: { name } }: EditorPageProps) {
   const editors: Record<string, React.ReactNode> = {
     draft: <Draft onChange={handleTextChange} />,
     quill: <Quill onChange={handleTextChange} />,
+    'slate-react': <Slate onChange={handleTextChange} />,
   };
   const iName = name.toLowerCase();
 
