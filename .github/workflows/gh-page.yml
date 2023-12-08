@@ -4,10 +4,6 @@ on:
   push:
     branches: [main]
 
-env:
-  ASSET_PREFIX: /react-texteditor-example/
-  BASE_PATH: /react-texteditor-example
-
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -20,8 +16,17 @@ jobs:
         with:
           version: 8
           run_install: true
+      - name: Set Environment Variables
+        env:
+          ASSET_PREFIX: /react-texteditor-example/
+          BASE_PATH: /react-texteditor-example
+        run: touch .env
+          echo ASSET_PREFIX=$ASSET_PREFIX >> .env
+          echo BASE_PATH=$BASE_PATH >> .env
       - name: Build
         run: pnpm run build
+      - name: Create .nojekyll
+        run: touch ./out/.nojekyll
       - name: Deploy
         uses: JamesIves/github-pages-deploy-action@v4
         with:
