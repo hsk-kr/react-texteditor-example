@@ -1,0 +1,28 @@
+name: Github Page
+
+on:
+  push:
+    branches: [main]
+
+env:
+  ASSET_PREFIX: /react-texteditor-example/
+  BASE_PATH: /react-texteditor-example
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: Install Packages
+        uses: pnpm/action-setup@v2
+        with:
+          version: 8
+          run_install: true
+      - name: Build
+        run: pnpm run build
+      - name: Deploy
+        uses: JamesIves/github-pages-deploy-action@v4
+        with:
+          folder: out

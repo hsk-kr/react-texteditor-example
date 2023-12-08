@@ -26,7 +26,7 @@ const formats = [
   'bullet',
 ];
 
-export function Quill({ onChange }: QuillProps) {
+export default function Quill({ onChange }: QuillProps) {
   const [value, setValue] = useState('');
 
   useEffect(() => {
