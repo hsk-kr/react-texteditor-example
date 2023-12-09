@@ -287,10 +287,10 @@ export default function SlateComp({ onChange }: SlateProps) {
       onChange(editor.innerHTML);
     };
 
-    editor.addEventListener('keypress', handleContentChange);
+    editor.addEventListener('keyup', handleContentChange);
 
     return () => {
-      editor.removeEventListener('keypress', handleContentChange);
+      editor.removeEventListener('keyup', handleContentChange);
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
