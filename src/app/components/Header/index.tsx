@@ -39,7 +39,9 @@ export default function Header() {
             key={route.label}
             href={route.href}
             className={`flex h-full justify-center items-center whitespace-nowrap transition-all ${
-              active ? `bg-secondary flex-[2]` : 'flex-[1] bg-tertiary'
+              active
+                ? `bg-secondary flex-[2] text-primary font-bold`
+                : 'flex-[1] bg-tertiary'
             }`}
           >
             {active ? route.label : route.sLabel}
