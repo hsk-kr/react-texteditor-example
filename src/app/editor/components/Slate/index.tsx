@@ -31,7 +31,7 @@ interface ToolsProps {
 
 declare module 'slate' {
   interface BaseElement {
-    format: Format;
+    type: Type;
   }
 
   interface BaseText {
@@ -41,15 +41,15 @@ declare module 'slate' {
   }
 }
 
-type Format = (typeof format)[number];
+type Type = (typeof types)[number];
 
-type FormatType = 'block' | 'inline';
+type TypeStyle = 'block' | 'inline';
 
-type NodeProperty = Partial<BaseElement> & { format: Format };
+type NodeProperty = Partial<BaseElement> & { type: Type };
 
 const initialValue: any = [
   {
-    format: 'paragraph',
+    type: 'paragraph',
     children: [
       {
         text: '',
@@ -58,11 +58,10 @@ const initialValue: any = [
   },
 ];
 
-const blockFormat = [
+const blockTypes = [
   'header-one',
   'header-two',
   'header-three',
-
   'blockquote',
   'unordered-list-item',
   'ordered-list-item',
@@ -70,61 +69,61 @@ const blockFormat = [
   'list-item',
 ] as const;
 
-const markFormat = ['bold', 'italic', 'underline'] as const;
+const markTypes = ['bold', 'italic', 'underline'] as const;
 
-const format = [...blockFormat, ...markFormat] as const;
+const types = [...blockTypes, ...markTypes] as const;
 
 const tools: {
   label: string;
-  format: Format;
-  formatType: FormatType;
+  type: Type;
+  style: TypeStyle;
   isList?: boolean;
 }[] = [
   {
     label: 'H1',
-    format: 'header-one',
-    formatType: 'block',
+    type: 'header-one',
+    style: 'block',
   },
   {
     label: 'H2',
-    format: 'header-two',
-    formatType: 'block',
+    type: 'header-two',
+    style: 'block',
   },
   {
     label: 'H3',
-    format: 'header-three',
-    formatType: 'block',
+    type: 'header-three',
+    style: 'block',
   },
   {
     label: 'Bold',
-    format: 'bold',
-    formatType: 'inline',
+    type: 'bold',
+    style: 'inline',
   },
   {
     label: 'Italic',
-    format: 'italic',
-    formatType: 'inline',
+    type: 'italic',
+    style: 'inline',
   },
   {
     label: 'Underline',
-    format: 'underline',
-    formatType: 'inline',
+    type: 'underline',
+    style: 'inline',
   },
   {
     label: 'Blockquote',
-    format: 'blockquote',
-    formatType: 'block',
+    type: 'blockquote',
+    style: 'block',
   },
   {
     label: 'UL',
-    format: 'unordered-list-item',
-    formatType: 'block',
+    type: 'unordered-list-item',
+    style: 'block',
     isList: true,
   },
   {
     label: 'OL',
-    format: 'ordered-list-item',
-    formatType: 'block',
+    type: 'ordered-list-item',
+    style: 'block',
     isList: true,
   },
 ];
@@ -147,43 +146,39 @@ const ToolButton = ({ label, active, onToggle }: ToolButtonProps) => {
 
 const Tools = ({ editor, onToggle }: ToolsProps) => {
   const handleToggle = (tool: (typeof tools)[0]) => () => {
-    if (tool.formatType === 'block') {
-      const isActive = isBlockActive(tool.format);
+    if (tool.style === 'block') {
+      const isActive = isBlockActive(tool.type);
 
       Transforms.unwrapNodes(editor, {
         match: (n) =>
           !Editor.isEditor(n) &&
           SlateElement.isElement(n) &&
-          LIST_TYPES.includes((n as NodeProperty).format),
+          LIST_TYPES.includes((n as NodeProperty).type),
         split: true,
       });
 
       const newProperties: NodeProperty = {
-        format: isActive
-          ? 'paragraph'
-          : tool.isList
-          ? 'list-item'
-          : tool.format,
+        type: isActive ? 'paragraph' : tool.isList ? 'list-item' : tool.type,
       };
 
       Transforms.setNodes<SlateElement>(editor, newProperties);
 
       if (!isActive && tool.isList) {
-        const block = { format: tool.format, children: [] };
+        const block = { type: tool.type, children: [] };
         Transforms.wrapNodes(editor, block);
       }
     } else {
-      if (isMarkActive(tool.format)) {
-        Editor.removeMark(editor, tool.format);
+      if (isMarkActive(tool.type)) {
+        Editor.removeMark(editor, tool.type);
       } else {
-        Editor.addMark(editor, tool.format, true);
+        Editor.addMark(editor, tool.type, true);
       }
     }
 
     setTimeout(() => onToggle(tool), 0);
   };
 
-  const isBlockActive = (format: Format) => {
+  const isBlockActive = (type: Type) => {
     const { selection } = editor;
     if (!selection) return false;
 
@@ -193,25 +188,25 @@ const Tools = ({ editor, onToggle }: ToolsProps) => {
         match: (n) =>
           !Editor.isEditor(n) &&
           SlateElement.isElement(n) &&
-          (n as NodeProperty).format === format,
+          (n as NodeProperty).type === type,
       })
     );
 
     return !!match;
   };
 
-  const isMarkActive = (format: Format) => {
+  const isMarkActive = (type: Type) => {
     const marks = Editor.marks(editor);
-    return marks ? (marks as any)[format] === true : false;
+    return marks ? (marks as any)[type] === true : false;
   };
 
   return (
     <div className="min-h-12 max-h-24 flex gap-1 p-2 border-b-gray-800 border flex-wrap">
       {tools.map((tool) => {
         const active =
-          tool.formatType === 'block'
-            ? isBlockActive(tool.format)
-            : isMarkActive(tool.format);
+          tool.style === 'block'
+            ? isBlockActive(tool.type)
+            : isMarkActive(tool.type);
 
         return (
           <ToolButton
@@ -243,7 +238,7 @@ const Leaf = ({ attributes, children, leaf }: RenderLeafProps) => {
 };
 
 const Element = ({ attributes, children, element }: RenderElementProps) => {
-  switch (element.format) {
+  switch (element.type) {
     case 'blockquote':
       return <blockquote {...attributes}>{children}</blockquote>;
     case 'unordered-list-item':
