@@ -1,6 +1,6 @@
 1:HL["/react-texteditor-example/_next/static/media/c9a5bc6a7c948fb0-s.p.woff2","font",{"crossOrigin":"","type":"font/woff2"}]
 2:HL["/react-texteditor-example/_next/static/css/2a5d6a05dbea883e.css","style",{"crossOrigin":""}]
-0:["OhO2rhRdV4nJ6AHVkESMr",[[["",{"children":["editor",{"children":[["name","slate-react","d"],{"children":["__PAGE__?{\"name\":\"slate-react\"}",{}]}]}]},"$undefined","$undefined",true],"$L3",[[["$","link","0",{"rel":"stylesheet","href":"/react-texteditor-example/_next/static/css/2a5d6a05dbea883e.css","precedence":"next","crossOrigin":""}]],"$L4"]]]]
+0:["_9OWT8oFuj2-Vurwbmhqt",[[["",{"children":["editor",{"children":[["name","slate-react","d"],{"children":["__PAGE__?{\"name\":\"slate-react\"}",{}]}]}]},"$undefined","$undefined",true],"$L3",[[["$","link","0",{"rel":"stylesheet","href":"/react-texteditor-example/_next/static/css/2a5d6a05dbea883e.css","precedence":"next","crossOrigin":""}]],"$L4"]]]]
 5:I[390,["998","static/chunks/998-b8e4b4158332360c.js","185","static/chunks/app/layout-1a098c2bc5e9f0ec.js"],""]
 6:I[46083,[],""]
 7:I[5732,[],""]
