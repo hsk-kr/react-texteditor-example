@@ -85,6 +85,7 @@ export default function Editor({ name }: EditorProps) {
 }
 
 const removeHtmlTags = (html: string) => {
+  if (typeof DOMParser === 'undefined') return html;
   let tmpHtml = new DOMParser().parseFromString(html, 'text/html');
   return tmpHtml.body.textContent?.trim() ?? '';
 };
