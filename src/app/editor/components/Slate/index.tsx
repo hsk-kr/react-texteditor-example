@@ -128,8 +128,6 @@ const tools: {
   },
 ];
 
-const LIST_TYPES = ['unordered-list-item', 'ordered-list-item'];
-
 const ToolButton = ({ label, active, onToggle }: ToolButtonProps) => {
   return (
     <button
@@ -153,7 +151,7 @@ const Tools = ({ editor, onToggle }: ToolsProps) => {
         match: (n) =>
           !Editor.isEditor(n) &&
           SlateElement.isElement(n) &&
-          LIST_TYPES.includes((n as NodeProperty).type),
+          tools.find((tool) => tool.type === n.type)?.isList === true,
         split: true,
       });
 
@@ -267,6 +265,7 @@ export default function SlateComp({ onChange }: SlateProps) {
     (props: RenderLeafProps) => <Leaf {...props} />,
     []
   );
+  const [_, forceUpdate] = useState(false);
   const [editor] = useState(() => withReact(createEditor()));
   const containerRef = useRef<HTMLDivElement>(null);
 
@@ -283,14 +282,20 @@ export default function SlateComp({ onChange }: SlateProps) {
       containerRef.current?.querySelector<HTMLDivElement>('[role=textbox]');
     if (!editor) return;
 
+    const _forceUpdate = () => forceUpdate((v) => !v);
+
     const handleContentChange = () => {
       onChange(editor.innerHTML);
     };
 
     editor.addEventListener('keyup', handleContentChange);
+    editor.addEventListener('mousedown', _forceUpdate);
+    editor.addEventListener('keydown', _forceUpdate);
 
     return () => {
       editor.removeEventListener('keyup', handleContentChange);
+      editor.removeEventListener('mousedown', _forceUpdate);
+      editor.removeEventListener('keydown', _forceUpdate);
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
