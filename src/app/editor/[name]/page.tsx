@@ -1,4 +1,3 @@
-import { Suspense } from 'react';
 import Editor from '../components/Editor';
 interface EditorPageProps {
   params: {
