@@ -20,8 +20,8 @@ jobs:
         env:
           BASE_PATH: /react-texteditor-example
         run: |
-          echo "" > .env
-          echo BASE_PATH=$BASE_PATH >> .env
+          echo "" > .env.local
+          echo BASE_PATH=$BASE_PATH >> .env.local
       - name: Build
         run: pnpm run build
       - name: Create .nojekyll
